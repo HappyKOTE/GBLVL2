@@ -2,238 +2,38 @@
 <html lang="en">
 
 <head>
-    <title>Персональная страничка студента</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <style>
-        .card,
-        .modal.fade.show {
-            backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.2) !important;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Shop</title>
 </head>
 
-<body class="bg-dark" style="background-image: url(img/space.jpg); background-position: center; background-repeat:no-repeat; background-size: cover; background-attachment: fixed;">
-    <div class="container mt-5">
-        <div class="h1 mb-3 text-light">
-            <i class="far fa-smile"></i>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 mb-4 text-light">
-                <p><span class="text-secondary">var</span> myName = <span class="text-success">"Владимир Павлов"</span>;</p>
-                <p>Всем, привет! Я web-дизайнил, арт-директил, бренд-менеджил, проектами управлял, внедрял SAP системы на 300К юзеров, стал владельцем продукта в области искуственного интелекта в банке и за всё это время так и не написал ни строчки кода
-                    на JS, PHP, Java или Python!</p>
-                <p>Решил исправится, а область front'а наиболее близка мне по бэкграудну.</p>
-                <p>Web-дизайн, HTML и CSS мне прекрасно знакомы, а заморачиваться над дизайном дико лень, поэтому нагло использую дизайн систему из css framework
-                    <a href="https://v5.getbootstrap.com" target="_blank" class="text-warning">bootstrap</a> и либу с пиктограммами
-                    <a href="https://fontawesome.com" target="_blank" class="text-nowrap text-warning">font awesome</a>.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card text-light bg-transparent shadow-lg">
-                    <div class="card-header text-center">
-                        <i class="far fa-grin-tongue-wink h1 text-light"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Загадки</h5>
-                        <p class="card-text">Несколько простых детских загадок с выводом числа правильных ответов</p>
-                        <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#game1">Поотгадывать</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card text-light bg-transparent shadow-lg">
-                    <div class="card-header text-center">
-                        <i class="fas fa-hat-wizard h1 text-light"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Угадайка</h5>
-                        <p class="card-text">Простая игра для двух игроков по отгадыванию числа от 1 до 100</p>
-                        <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#game2">Косплеить экстрасенса</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card text-light bg-transparent shadow-lg">
-                    <div class="card-header text-center">
-                        <i class="fas fa-user-secret h1 text-light"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Генпароллер</h5>
-                        <p class="card-text">Создание безопасного пароля с вводом числа символов</p>
-                        <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#game3">Шифрануться</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body class="bg-light">
 
-    <div class="modal fade" id="game1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Отгадай загадки</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+    <section class="mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3 class="mb-4">Список товаров</h3>
+                    <div class="row goods-list"></div>
                 </div>
-                <div class="modal-body">
-                    <form method="GET">
-                        <div class="mb-3">
-                            <label for="answer" class="form-label">Висит груша нельзя скушать</label>
-                            <input type="text" class="form-control" id="game1answer1">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="mb-4">Корзина</h3>
                         </div>
-                        <div class="mb-3">
-                            <label for="answer" class="form-label">Зимой и летом одним цветом</label>
-                            <input type="text" class="form-control" id="game1answer2">
-                        </div>
-                        <div class="mb-3">
-                            <label for="answer" class="form-label">Он красив и ярко-красен, Но он жгуч, горяч, опасен!</label>
-                            <input type="text" class="form-control" id="game1answer3">
-                        </div>
-                        <a href="#" onclick="compareAnswer()" class="btn btn-dark" id="game1submit">Проверить</a>
-                    </form>
+                        <div id="cart-reset" class="col"></div>
+                    </div>
+                    <div class="cart-list"></div>
+                    <div class="cart-price"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <script type="text/javascript">
-        var rightAnswer = 0;
-
-        function checkAnswer(inputId, answears) {
-            var userAnswer = document.getElementById(inputId).value;
-            for (i = 0; i < answears.length; i++) {
-                if (userAnswer.toUpperCase() == answears[i].toUpperCase()) {
-                    rightAnswer++;
-                    break;
-                }
-            }
-        }
-
-        function compareAnswer() {
-            rightAnswer = 0;
-            checkAnswer("game1answer1", ["лампочка"]);
-            checkAnswer("game1answer2", ["ёлка", "ель", "елка"]);
-            checkAnswer("game1answer3", ["огонь", "пламя"]);
-            alert("Отгадано загадок: " + rightAnswer);
-        }
-    </script>
-
-    <div class="modal fade" id="game2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Угадайка</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="game2answer" class="form-label" id="game2text">Игрок 1 угадай число от 1 до 100</label>
-                            <input type="number" class="form-control" id="game2answer">
-                            <div id="game2help" class="form-text text-warning"></div>
-                        </div>
-                        <a href="#" onclick="checkNumber()" id="game2submit" class="btn btn-dark">Проверить</a>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        var randomNum = parseInt(Math.random() * 100);
-        var userTryCount = 1;
-        var userNumber = 1;
-
-        function readUserValue() {
-            return +document.getElementById("game2answer").value;
-        }
-
-        function writeSomething(text) {
-            document.getElementById("game2text").innerHTML = text;
-        }
-
-        function writeHelp(text) {
-            document.getElementById("game2help").innerHTML = text;
-        }
-
-        function hide(id) {
-            document.getElementById(id).style = "display:none";
-        }
-
-        function checkNumber() {
-            if (userTryCount % 2 == 0) {
-                userNumber = 1;
-            } else {
-                userNumber = 2;
-            }
-            writeSomething("Игрок " + userNumber + " угадай число от 1 до 100");
-            var userAnswer = readUserValue();
-            if (userAnswer == randomNum) {
-                writeSomething("<b>Поздравляю, Игрок " + userNumber + " выиграл!</b>");
-                hide("game2help");
-                hide("game2submit");
-                hide("game2answer");
-            } else if (userAnswer > randomNum) {
-                writeHelp("Слишком большое число");
-            } else if (userAnswer < randomNum) {
-                writeHelp("Слишком маленькое число");
-            }
-            userTryCount++;
-        }
-    </script>
-
-    <div class="modal fade" id="game3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Генпароллер</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="game3answer" class="form-label" id="game3text">Псс..парень, а давай придумаем пароль, но сначала уточни сколько символов должно быть в нём?</label>
-                            <input type="number" class="form-control" id="game3answer">
-                        </div>
-                        <a href="#" onclick="generatePassword()" id="game3submit" class="btn btn-dark">Сгенерироваться пароль</a>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        var symbols = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "m", "m", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-
-        function randomSymbol() {
-            var randomNumber = parseInt(Math.random() * symbols.length);
-            return symbols[randomNumber - 1];
-        }
-
-        function readNumber() {
-            return +document.getElementById("game3answer").value;
-        }
-
-        function writePassword(text) {
-            document.getElementById("game3text").innerHTML = text;
-        }
-
-        function generatePassword() {
-            var password = "";
-            if (readNumber() == "") {
-                writePassword("<span class='text-warning'>Число символов не может быть пустым или равно 0</span>");
-            } else {
-                for (var i = 0; i < readNumber(); i++) {
-                    var n = randomSymbol();
-                    password = password + n;
-                }
-                writePassword("<span class='text-muted'>Ваш пароль</span> <b>" + password + "</b>");
-            }
-        }
-    </script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/truncate.js"></script>
 </body>
 
 </html>
