@@ -1,3 +1,5 @@
+// помучался, пока не нашел мануал для либы express, которая существенно упрощает создание сервера
+
 let express = require('express'),
     app = express();
 app.use(express.static(__dirname + '/public'));
