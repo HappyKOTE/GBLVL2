@@ -127,9 +127,21 @@ function thellipsis(element, max_lines, debug) {
 }
 
 const elementsThatShouldEllipsis = document.getElementsByClassName('card-title');
-window.onresize = function () {
+window.onresize = () => {
+  renderTruncate()
+}
+
+function renderTruncate() {
   Array.prototype.forEach.call(elementsThatShouldEllipsis, function (element) {
     thellipsis(element, 3, false);
   });
 }
+
+function ex3() {
+  setTimeout(() => {
+    renderTruncate();
+  }, 100);
+}
+ex3();
+
 window.dispatchEvent(new Event("resize"));
