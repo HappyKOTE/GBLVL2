@@ -72,7 +72,7 @@ class GoodItem {
         const block = document.createElement('div')
         block.classList.add('col-md-12', 'col-lg-6', 'mb-4')
         block.innerHTML = `
-            <div class="card h-100">
+            <div class="card h-100 shadow-sm">
                 <div class="card-body">
                     <div class="good-img" style="background-image: url(${this._img});"></div>
                     <h5 class="card-title" title="${this._name}">${this._name}</h5>
@@ -90,20 +90,30 @@ class GoodItem {
 class Cart {
     _items = []
 
-    add(GoodItemInstance) {
+    add(GoodItemInstance, count = 1) {
         const FoundItem = this._items.find((CartItem) => {
             return CartItem._name === GoodItemInstance._name
         })
         if (FoundItem) {
-            FoundItem.counter++
+            FoundItem.counter += count
         } else {
             this._items.push(new CartItem({
                 name: GoodItemInstance._name,
                 price: GoodItemInstance._price,
                 img: GoodItemInstance._img,
-            }))
+            }, this))
         }
         this.render()
+    }
+
+    remove() {
+        const itemIndex = this._items.findIndex(item => item._name == this._items._name)
+        this._items.splice(itemIndex, 1)
+        if (this._items.length == 0) {
+            this.resetCart()
+        } else {
+            this.render()
+        }
     }
 
     render() {
@@ -125,7 +135,7 @@ class Cart {
         }
         const summBlock = document.createElement('div')
         summBlock.innerHTML = `
-        <div class="card bg-success text-white mb-4 mt-4">
+        <div class="card bg-success text-white mb-4 mt-4 shadow-sm">
             <div class="card-header">Общая сумма заказа</div>
             <div class="card-body fs-3">${summ} руб.</div>
         </div>
@@ -145,28 +155,30 @@ class CartItem {
     _price = 0
     counter = 1
     _img = ''
+    _CartInstance = null
 
-    constructor({ name, price, img }, CartInstane) {
+    constructor({ name, price, img }, CartInstance) {
         this._name = name
         this._price = price
         this._img = img
+        this._CartInstance = CartInstance
     }
 
     removeFromCart() {
-        console.log('remove')
+        this._CartInstance.remove()
     }
 
     countMinus() {
-        console.log('minus')
+        this._CartInstance.add(this, -1)
     }
 
     countPlus() {
-        console.log('plus')
+        this._CartInstance.add(this)
     }
 
     render(placeToRender) {
         const block = document.createElement('div')
-        block.classList.add('card', 'position-relative', 'mb-4')
+        block.classList.add('card', 'position-relative', 'mb-4', 'shadow-sm')
         block.innerHTML = `
             <div class="card-body cart-items">
                 <div class="row">
@@ -183,7 +195,7 @@ class CartItem {
         btn.render(block)
 
         const addBtnBlock = block.querySelector('.input-group');
-        const btnMinus = new CartCountButton('<i class="bi bi-dash"></i>', this.countMinus.bind(this))
+        const btnMinus = new CartCountButton('➖', this.countMinus.bind(this))
         btnMinus.render(addBtnBlock)
 
         const countBlock = document.createElement('div')
@@ -191,12 +203,100 @@ class CartItem {
         countBlock.innerHTML = `${this.counter}`
         addBtnBlock.appendChild(countBlock)
 
-        const btnPlus = new CartCountButton('<i class="bi bi-plus"></i>', this.countPlus.bind(this))
+        const btnPlus = new CartCountButton('➕', this.countPlus.bind(this))
         btnPlus.render(addBtnBlock)
 
         placeToRender.appendChild(block)
     }
 }
 
+class FeedbackInputs {
+    _inputs = []
+
+    fetchInputs() {
+        return [
+            { placeholder: "Имя содержит только буквы", type: "name", text: "имя", id: "floatingName", },
+            { placeholder: "Телефон в формате +7(000)000-0000", type: "tel", text: "телефон", id: "floatingPhone", },
+            { placeholder: "name@example.com", type: "email", text: "email", id: "floatingEmail", },
+            { placeholder: "без проверки", type: "text", text: "пишите что хотите", id: "floatingOthers", }
+        ]
+    }
+
+    constructor() {
+        let inputs = this.fetchInputs()
+        inputs = inputs.map(item => {
+            return new InputItem(item)
+        })
+        this._inputs = inputs
+        this.render()
+    }
+
+    render() {
+        this._inputs.forEach(input => {
+            input.render()
+            input.validate()
+        })
+    }
+}
+
+class InputItem {
+    _placeholder = ''
+    _type = ''
+    _text = ''
+    _id = ''
+
+    constructor({ placeholder, type, text, id }) {
+        this._placeholder = placeholder
+        this._type = type
+        this._text = text
+        this._id = id
+    }
+
+    validate() {
+        const validInput = document.getElementById(this._id)
+        validInput.addEventListener('change', () => {
+            const text = validInput.value
+            let re = /./
+            if (this._type === 'name') {
+                re = /^[A-ZА-Я]{1,32}$/i
+            } else if (this._type === 'tel') {
+                re = /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
+            } else if (this._type === 'email') {
+                re = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
+            } else {
+                re = false
+            }
+            if (re) {
+                const result = text.match(re);
+                if (!result) {
+                    validInput.classList.remove('is-valid')
+                    validInput.classList.add('is-invalid')
+                    console.warn('некорректно заполнено поле: ' + this._text)
+                } else {
+                    validInput.classList.remove('is-invalid')
+                    validInput.classList.add('is-valid')
+                    console.log('корректно заполнено поле: ' + this._text)
+                }
+            }
+        });
+    }
+
+    render() {
+        const placeToRender = document.querySelector('.modal-body')
+        if (placeToRender) {
+            const block = document.createElement('form')
+            block.classList.add('needs-validation')
+            block.innerHTML = `
+            <div class="form-floating mb-3">
+                <input type="${this._type}" class="form-control" id="${this._id}" placeholder="${this._placeholder}">
+                <label for="${this._id}">${this._text}</label>
+            </div>
+        `
+            placeToRender.appendChild(block)
+        }
+    }
+}
+
 const CartInstane = new Cart()
 new List(CartInstane)
+new FeedbackInputs()
