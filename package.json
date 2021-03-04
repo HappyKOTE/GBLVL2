@@ -11,7 +11,7 @@
         "type": "git",
         "url": "git+https://github.com/HappyKOTE/GBLVL2.git"
     },
-    "author": "Dmitry",
+    "author": "Vladimir",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/HappyKOTE/GBLVL2/issues"
@@ -19,5 +19,9 @@
     "homepage": "https://github.com/HappyKOTE/GBLVL2#readme",
     "dependencies": {
         "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "webpack": "^5.24.3",
+        "webpack-cli": "^4.5.0"
     }
 }
