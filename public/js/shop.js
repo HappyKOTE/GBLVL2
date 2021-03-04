@@ -1,3 +1,19 @@
+class RemoveCartButton extends Button {
+    getTemplate() {
+        const btn = document.createElement('button')
+        btn.classList.add('position-absolute', 'top-0', 'end-0', 'btn-close', 'mt-2', 'me-2')
+        return btn
+    }
+}
+
+class CartCountButton extends Button {
+    getTemplate() {
+        const btn = document.createElement('button')
+        btn.classList.add('btn', 'btn-outline-secondary')
+        return btn
+    }
+}
+
 class List {
     _items = []
     _page = 1
