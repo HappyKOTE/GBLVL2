@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "name": "Видеокарта ASUS Turbo GeForce RTX 3090 24GB GDDR6X",
+            "price": 289890,
+            "img": "img/good-9.jpg",
+            "id": "jjj",
+            "quantity": 1
+        },
+        {
+            "name": "Видеокарта MSI GeForce RTX 3090 AERO 24G",
+            "price": 288790,
+            "img": "img/good-10.jpg",
+            "id": "kkk",
+            "quantity": 1
+        },
+        {
+            "name": "Видеокарта MSI GeForce GTX 1650 SUPER GAMING X 4GB",
+            "price": 29895,
+            "img": "img/good-11.jpg",
+            "id": "lll",
+            "quantity": 1
+        },
+        {
+            "name": "Видеокарта GIGABYTE GeForce GT 1030 OC 2G",
+            "price": 7829,
+            "img": "img/good-12.jpg",
+            "id": "ppp",
+            "quantity": 1
+        }
+    ]
+}
