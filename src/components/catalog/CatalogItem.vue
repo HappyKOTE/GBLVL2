@@ -21,9 +21,7 @@
 <script>
 export default {
   data() {
-    return {
-      items: [],
-    };
+    return {};
   },
   props: {
     items: Array,
