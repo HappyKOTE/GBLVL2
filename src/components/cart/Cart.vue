@@ -10,14 +10,16 @@
       v-if="cartVisible"
       @click="cartReset"
       class="btn btn-outline-danger w-100"
-      ><i class="fas fa-trash"></i> Удалить всё из корзины</a
+      >Удалить всё из корзины</a
     >
     <div
       v-if="cartVisible"
       class="card bg-success text-white mb-4 mt-4 shadow-sm"
     >
       <div class="card-header">Общая сумма заказа</div>
-      <div class="card-body fs-3">{{ cartSumm }} руб.</div>
+      <div class="card-body fs-3">
+        <span class="v-price">{{ cartSumm }}</span> <small>&#8381;</small>
+      </div>
     </div>
   </section>
 </template>
