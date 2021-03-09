@@ -11,7 +11,9 @@
             {{ item.name }}
           </h5>
           <p class="card-text text-primary fw-bold">{{ item.price }} руб.</p>
-          <button class="btn btn-primary w-100">Добавить в корзину</button>
+          <button class="btn btn-primary w-100">
+            <i class="fas fa-cart-plus"></i> Добавить в корзину
+          </button>
         </div>
       </div>
     </div>

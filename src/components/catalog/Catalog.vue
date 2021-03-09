@@ -1,7 +1,6 @@
 <template>
   <section>
     <CatalogItem :items="this.items" />
-    <button @click="changeCounter" class="btn btn-primary">click me</button>
   </section>
 </template>
 
@@ -11,7 +10,6 @@ import CatalogItem from "./CatalogItem.vue";
 export default {
   data() {
     return {
-      counter: 0,
       items: [
         {
           name: "Видеокарта ASUS TUF Gaming GeForce GTX 1650 OC 4 GB",
@@ -45,14 +43,7 @@ export default {
     };
   },
   components: { CatalogItem },
-  methods: {
-    changeCounter() {
-      this.counter++;
-      this.$emit("clicked", { cnt: this.counter });
-    },
-    showMoreButton() {},
-    fetchGoods() {},
-  },
+  methods: {},
 };
 </script>
 

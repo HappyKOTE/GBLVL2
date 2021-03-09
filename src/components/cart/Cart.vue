@@ -1,6 +1,24 @@
 <template>
   <section>
-    <CartItem :items="this.items" />
+    <CartItem
+      :items="this.items"
+      @emptyCart="cartReset"
+      @changeCartSumm="getCartSumm"
+    />
+    <a
+      href="#"
+      v-if="cartVisible"
+      @click="cartReset"
+      class="btn btn-outline-danger w-100"
+      ><i class="fas fa-trash"></i> Удалить всё из корзины</a
+    >
+    <div
+      v-if="cartVisible"
+      class="card bg-success text-white mb-4 mt-4 shadow-sm"
+    >
+      <div class="card-header">Общая сумма заказа</div>
+      <div class="card-body fs-3">{{ cartSumm }} руб.</div>
+    </div>
   </section>
 </template>
 
@@ -10,7 +28,8 @@ import CartItem from "./CartItem.vue";
 export default {
   data() {
     return {
-      counter: 0,
+      cartVisible: true,
+      cartSumm: 0,
       items: [
         {
           name: "Видеокарта ASUS TUF Gaming GeForce GTX 1650 OC 4 GB",
@@ -45,7 +64,21 @@ export default {
   },
   components: { CartItem },
   methods: {
-    cartReset() {},
+    cartReset() {
+      this.items = [];
+      document.querySelector(".cart-list").innerHTML =
+        "Эй майнер, твоя корзина пуста 😪";
+      this.cartVisible = false;
+    },
+    getCartSumm() {
+      this.cartSumm = 0;
+      for (let i = 0; i < this.items.length; i++) {
+        this.cartSumm += this.items[i].price * this.items[i].count;
+      }
+    },
+  },
+  mounted() {
+    this.getCartSumm();
   },
 };
 </script>

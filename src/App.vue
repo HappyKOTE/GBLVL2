@@ -4,8 +4,7 @@
       <div class="row">
         <div class="col">
           <h3 class="mb-4">Каталог</h3>
-          <Catalog @clicked="onButtonCounterClick" />
-          <div>Сколько раз была нажата кнопка {{ counter }}</div>
+          <Catalog />
         </div>
         <div class="col">
           <h3 class="mb-4">Корзина</h3>
@@ -22,16 +21,10 @@ import Cart from "./components/cart/Cart.vue";
 
 export default {
   data() {
-    return {
-      counter: 0,
-    };
+    return {};
   },
   components: { Catalog, Cart },
-  methods: {
-    onButtonCounterClick({ cnt }) {
-      this.counter = cnt;
-    },
-  },
+  methods: {},
 };
 </script>
 
