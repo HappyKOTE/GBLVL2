@@ -21,23 +21,37 @@
             <div class="fw-bold truncate" :title="item.name">
               {{ item.name }}
             </div>
-            <div class="text-primary fw-bold mt-2 mb-2">
-              {{ item.price }} руб.
-            </div>
-            <div class="input-group input-group-sm">
-              <button
-                class="btn btn-outline-secondary"
-                @click="itemMinus(index)"
-              >
-                <i class="fas fa-minus fa-fw"></i>
-              </button>
-              <div class="input-group-text">{{ item.count }}</div>
-              <button
-                class="btn btn-outline-secondary"
-                @click="itemPlus(index)"
-              >
-                <i class="fas fa-plus fa-fw"></i>
-              </button>
+            <div class="row align-items-center">
+              <div class="col">
+                <div class="text-primary fw-bold mt-2 mb-2 text-nowrap">
+                  {{ item.price }} руб.
+                </div>
+              </div>
+              <div class="col">
+                <div class="d-inline-block">
+                  <div
+                    class="d-flex flex-row align-items-center border rounded"
+                  >
+                    <div>
+                      <button
+                        class="btn btn-link link-secondary btn-sm align-self-center"
+                        @click="itemMinus(index)"
+                      >
+                        <i class="fas fa-minus fa-fw"></i>
+                      </button>
+                    </div>
+                    <div class="align-self-center">{{ item.count }}</div>
+                    <div>
+                      <button
+                        class="btn btn-link link-secondary btn-sm align-self-center"
+                        @click="itemPlus(index)"
+                      >
+                        <i class="fas fa-plus fa-fw"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
