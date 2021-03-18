@@ -11,8 +11,11 @@ export default new Vuex.Store({
     },
     mutations: {
         setData(state, payload) {
-            state.data = payload.newData
-            state.itemsOnPage = Object.keys(payload.newData)
+            state.data = { ...state.data, ...payload.newData }
+            state.itemsOnPage.push(...Object.keys(payload.newData))
+        },
+        setCart(state, payload) {
+            state.itemsInCart.push(...payload)
         },
         addCart(state, id) {
             if (!state.itemsInCart.includes(id)) {
@@ -26,12 +29,11 @@ export default new Vuex.Store({
             if (state.data[id].count > 1) {
                 state.data[id].count--
             } else {
-                state.itemsInCart.splice(id, 1)
+                state.itemsInCart.splice(state.itemsInCart.indexOf(id), 1);
             }
         },
         resetItemCart(state, id) {
-            state.data[id].count = 1
-            state.itemsInCart.splice(id, 1)
+            state.itemsInCart.splice(state.itemsInCart.indexOf(id), 1);
         },
         fullCartReset(state) {
             state.itemsInCart = []
@@ -39,6 +41,7 @@ export default new Vuex.Store({
     },
     getters: {
         getData: state => state.data,
+        getCart: state => state.itemsInCart,
         getItemsOnPage: state => state.itemsOnPage,
         getItemsInCart: state => state.itemsInCart,
         getFullPrice: state => {
@@ -47,12 +50,25 @@ export default new Vuex.Store({
     },
     actions: {
         requestData({ commit }, page) {
-            fetch(`./api/items${page}.json`)
-                .then(response => {
-                    return response.json()
+            fetch(`/itemslist/${page}`, {
+                method: 'GET',
+            })
+                .then(res => {
+                    return res.json()
                 })
-                .then(response => {
-                    commit('setData', { newData: response })
+                .then(res => {
+                    commit('setData', { newData: res })
+                })
+        },
+        requestCart({ commit }) {
+            fetch(`/cartlist`, {
+                method: 'GET',
+            })
+                .then(res => {
+                    return res.json()
+                })
+                .then(res => {
+                    commit('setCart', res)
                 })
         },
         addToCart({ commit }, id) {
@@ -66,6 +82,18 @@ export default new Vuex.Store({
         },
         cartReset({ commit }) {
             commit('fullCartReset')
+        },
+        addItem({ }, data) {
+            fetch('/itemslist', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => {
+                    return res.json()
+                })
         },
     },
 });

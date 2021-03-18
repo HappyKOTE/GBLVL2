@@ -32,11 +32,14 @@ import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: { CartItem },
   methods: {
-    ...mapMutations(["setData"]),
-    ...mapActions(["requestData", "cartReset"]),
+    ...mapMutations(["setData", "setCart"]),
+    ...mapActions(["requestData", "cartReset", "requestCart"]),
   },
   computed: {
-    ...mapGetters(["getData", "getFullPrice", "getItemsInCart"]),
+    ...mapGetters(["getData", "getFullPrice", "getItemsInCart", "getCart"]),
+  },
+  beforeMount() {
+    this.requestCart();
   },
 };
 </script>

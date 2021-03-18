@@ -1,0 +1,30 @@
+{
+    "eee": {
+        "name": "Видеокарта MSI Radeon RX 5600 XT GAMING X 6GB",
+        "price": 89590,
+        "img": "img/good-5.jpg",
+        "id": "eee",
+        "count": 1
+    },
+    "fff": {
+        "name": "Видеокарта ASRock Radeon RX 5500 XT Challenger D 8G OC",
+        "price": 44900,
+        "img": "img/good-6.jpg",
+        "id": "fff",
+        "count": 1
+    },
+    "ggg": {
+        "name": "Видеокарта Palit GeForce RTX 3090 GamingPro OC 24GB",
+        "price": 278000,
+        "img": "img/good-7.jpg",
+        "id": "ggg",
+        "count": 1
+    },
+    "hhh": {
+        "name": "Видеокарта ASRock Radeon RX 5700 XT Taichi X 8G OC+",
+        "price": 112990,
+        "img": "img/good-8.jpg",
+        "id": "hhh",
+        "count": 1
+    }
+}

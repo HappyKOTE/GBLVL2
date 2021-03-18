@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node server.js",
+        "start": "node server_express.js",
         "build": "webpack",
         "dev": "webpack serve --hot --config webpack.dev.config.js"
     },
@@ -21,6 +21,7 @@
     "homepage": "https://github.com/HappyKOTE/GBLVL2#readme",
     "dependencies": {
         "animate.css": "^4.1.1",
+        "body-parser": "^1.19.0",
         "express": "^4.17.1",
         "vue": "^2.6.12",
         "vue-loader": "^15.9.6",
